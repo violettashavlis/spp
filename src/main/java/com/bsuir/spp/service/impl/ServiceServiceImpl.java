@@ -5,6 +5,7 @@ import com.bsuir.spp.repository.ServiceRepository;
 import com.bsuir.spp.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +30,18 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public ServiceEntity findById(Integer id){
         Optional<ServiceEntity> entity = repository.findById(id);
-        if(entity.isPresent()){
-            return entity.get();
-        }else{
-            return null;
-        }
+        return entity.orElse(null);
     }
 
     @Override
     public List<ServiceEntity> findAll(){
         List<ServiceEntity> list = new ArrayList<>();
-        repository.findAll().forEach((data)->list.add(data));
+        repository.findAll().forEach(list::add);
         return list;
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Integer id){
         repository.deleteById(id);
         return !repository.existsById(id);
