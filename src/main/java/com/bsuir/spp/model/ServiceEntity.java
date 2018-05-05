@@ -13,7 +13,7 @@ public class ServiceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="serv_id",nullable = false,updatable = false)
     private int id;
-    @Column(name="serv_name",nullable = false)
+    @Column(name="serv_name",nullable = false,length = 50)
     private String name;
     @Column(name="serv_time",nullable = false)
     private float time;
@@ -21,6 +21,6 @@ public class ServiceEntity {
     private float price;
     @Column(name="serv_count_people",nullable = false)
     private int countPeople;
-    @Column(name="serv_description")
+    @Column(name="serv_description",length = 100)
     private String description;
 }
