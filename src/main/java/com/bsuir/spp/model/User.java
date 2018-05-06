@@ -3,6 +3,7 @@ package com.bsuir.spp.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="users",schema = "companyDB")
@@ -29,5 +30,7 @@ public class User {
     @Column(name="user_telephone",nullable = false,length=12)
     private String telephone;
 
-
+    @OneToMany
+    @JoinColumn(name="user_id")
+    private List<Comment> comments;
 }
